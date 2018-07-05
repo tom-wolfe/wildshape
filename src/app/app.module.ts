@@ -1,5 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CoreModule } from '@ws/core';
+import { SharedModule } from '@ws/shared';
+import { WildshapeModule } from '@ws/wildshape';
 
 import { AppComponent } from './app.component';
 
@@ -8,7 +10,9 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    SharedModule,
+    WildshapeModule,
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
