@@ -51,7 +51,7 @@ export interface Creature {
   challenge: {
     rating: number;
     experience: number;
-  }
+  };
 }
 
 export interface Action {
@@ -64,6 +64,6 @@ export interface Action {
     average: number;
     formula: string;
     type: string;
-  }
+  };
   description: string;
 }

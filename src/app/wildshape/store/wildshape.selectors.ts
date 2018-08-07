@@ -15,9 +15,9 @@ function creatureFilter(f: WildshapeFilter): (c: Creature) => boolean {
   };
 }
 
-function creatureSort(creatures: Creature[], sort: Sort): Creature[] {
-  if (!sort) return creatures;
-  return _.orderBy(creatures, sort.field, sort.ascending ? 'asc' : 'desc');
+function creatureSort(c: Creature[], sort: Sort): Creature[] {
+  if (!sort) { return c; }
+  return _.orderBy(c, sort.field, sort.ascending ? 'asc' : 'desc');
 }
 
 const creatures = createSelector(wildshape, (state: WildshapeState) => state.creatures);
@@ -25,8 +25,8 @@ const creatures = createSelector(wildshape, (state: WildshapeState) => state.cre
 const searchResults = createSelector(
   wildshape,
   creatures,
-  (state, creatures) => creatureSort(creatures.filter(creatureFilter(state.filter)), state.sort)
-)
+  (state, c) => creatureSort(c.filter(creatureFilter(state.filter)), state.sort)
+);
 
 export const selectors = {
   wildshape,
