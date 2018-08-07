@@ -17,5 +17,4 @@ export class WildshapeEffects {
         map(data => new Wildshape.SetCreatures(data))
       ))
     );
-
 }

@@ -4,7 +4,9 @@
     "baseUrl": "src",
     "outDir": "./dist/out-tsc",
     "paths": {
-      "@ws*": ["app*"]
+      "@ws*": [
+        "app*"
+      ]
     },
     "sourceMap": true,
     "declaration": false,

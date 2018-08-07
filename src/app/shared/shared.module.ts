@@ -1,19 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { FooterComponent } from '@ws/shared/components';
 
 const MODULES = [
   FormsModule,
   HttpClientModule,
-  BrowserModule,
+  CommonModule,
   RouterModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
 ];
 
 const COMPONENTS = [
-  // FooterComponent
+  FooterComponent
 ];
 
 @NgModule({
@@ -21,7 +22,7 @@ const COMPONENTS = [
     ...COMPONENTS
   ],
   imports: [
-    ...MODULES,
+    ...MODULES
   ],
   exports: [
     ...MODULES,
