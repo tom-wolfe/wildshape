@@ -3,7 +3,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { FooterComponent } from '@ws/shared/components';
 
 const MODULES = [
   FormsModule,
@@ -14,7 +13,7 @@ const MODULES = [
 ];
 
 const COMPONENTS = [
-  FooterComponent
+
 ];
 
 @NgModule({

@@ -1,1 +1,46 @@
-Search results
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th colspan="6">Abilities</th>
+      <th></th>
+      <th colspan="4">Senses</th>      
+    </tr>
+    <tr>
+      <th>Name</th>
+      <th>CR</th>
+      <th>HP</th>
+      <th>STR</th>
+      <th>DEX</th>
+      <th>CON</th>
+      <th>INT</th>
+      <th>WIS</th>
+      <th>CHA</th>
+      <th>DMG</th>
+      <th>TRS</th>
+      <th>BLS</th>
+      <th>DKV</th>
+      <th>TRM</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let creature of creatures">
+      <td>{{creature.name}}</td>
+      <td>{{creature.challenge.rating}}</td>
+      <td>{{creature.hp.average}}</td>
+      <td>{{creature.abilities.str}}</td>
+      <td>{{creature.abilities.dex}}</td>
+      <td>{{creature.abilities.con}}</td>
+      <td>{{creature.abilities.int}}</td>
+      <td>{{creature.abilities.wis}}</td>
+      <td>{{creature.abilities.cha}}</td>
+      <td>{{maxDamage(creature)}}</td>
+      <td>{{creature.senses.truesight > 0 ? creature.senses.truesight : ''}}</td>
+      <td>{{creature.senses.blindsight > 0 ? creature.senses.blindsight : ''}}</td>
+      <td>{{creature.senses.darkvision > 0 ? creature.senses.darkvision : ''}}</td>
+      <td>{{creature.senses.tremorsense > 0 ? creature.senses.tremorsense : ''}}</td>
+    </tr>
+  </tbody>
+</table>

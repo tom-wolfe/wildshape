@@ -2,7 +2,9 @@ import * as Actions from './wildshape.actions';
 import { WildshapeState } from './wildshape.state';
 
 export const initialState: WildshapeState = {
-  creatures: []
+  creatures: [],
+  filter: null,
+  sort: null
 };
 
 export function wildshapeReducer(state: WildshapeState = initialState, action: Actions.WildshapeAction): WildshapeState {
