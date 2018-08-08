@@ -4,6 +4,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import * as Directives from './directives';
+import * as Pipes from './pipes';
+
 const MODULES = [
   FormsModule,
   HttpClientModule,
@@ -16,16 +19,29 @@ const COMPONENTS = [
 
 ];
 
+const PIPES = [
+  Pipes.NonZeroPipe,
+  Pipes.ChallengeRatingPipe
+];
+
+const DIRECTIVES = [
+  Directives.SortDirective,
+];
+
 @NgModule({
   declarations: [
-    ...COMPONENTS
+    ...COMPONENTS,
+    ...PIPES,
+    ...DIRECTIVES
   ],
   imports: [
     ...MODULES
   ],
   exports: [
     ...MODULES,
-    ...COMPONENTS
+    ...COMPONENTS,
+    ...PIPES,
+    ...DIRECTIVES
   ]
 })
 export class SharedModule { }

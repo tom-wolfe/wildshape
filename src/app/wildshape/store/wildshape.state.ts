@@ -8,10 +8,10 @@ export interface WildshapeState {
 
 export interface Sort {
   field: string;
-  ascending: true;
+  ascending: boolean;
 }
 
 export interface WildshapeFilter {
+  level: number;
   moon: boolean;
-  level: boolean;
 }

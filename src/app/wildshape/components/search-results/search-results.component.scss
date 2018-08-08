@@ -1,0 +1,44 @@
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+
+:host {
+  font-size: 0.8rem;
+}
+
+tr.super th {
+  text-align: center;
+}
+
+tr.super th, td.border-right {
+  border-right: 1px solid $gray-400;
+}
+
+tr.super th:last-child {
+  border-right: none;
+}
+
+tr.headers th {
+  cursor: pointer;
+}
+
+
+th.ascending, th.descending {
+  padding-right: 8px;
+
+  &::after {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    margin-left: 8px;
+  }
+}
+
+th.ascending::after {
+  content: '\f15d';
+}
+
+th.descending::after {
+  content: '\f15e';
+}
