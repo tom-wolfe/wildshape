@@ -1,0 +1,19 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1>Wildshape</h1>
+    <div class="row">
+      <div class="col-md-3 col-sm-4">
+        <div class="form-group">
+          <label for="level">Druid Level</label>
+          <input class="form-control" name="level" type="number" min="1" max="20" [ngModel]="filter.level" (change)="setLevel($event.target.value)">
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="moon" [ngModel]="filter.moon" (change)="setMoon($event.target.checked)">
+          <label class="form-check-label" for="moon">
+            Moon Druid
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

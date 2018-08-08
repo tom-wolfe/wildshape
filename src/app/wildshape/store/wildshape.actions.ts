@@ -12,4 +12,22 @@ export class SetCreatures implements Action {
   constructor(public creatures: any[]) { }
 }
 
-export type WildshapeAction = LoadCreatures | SetCreatures;
+export class SetFilterLevel implements Action {
+  public static readonly TYPE = '[Wildshape] Set Filter Level';
+  readonly type = SetFilterLevel.TYPE;
+  constructor(public level: number) { }
+}
+
+export class SetFilterMoon implements Action {
+  public static readonly TYPE = '[Wildshape] Set Filter Moon';
+  readonly type = SetFilterMoon.TYPE;
+  constructor(public moon: boolean) { }
+}
+
+export class SetSortField implements Action {
+  public static readonly TYPE = '[Wildshape] Set Sort Field';
+  readonly type = SetSortField.TYPE;
+  constructor(public field: string) { }
+}
+
+export type WildshapeAction = LoadCreatures | SetCreatures | SetFilterLevel | SetFilterMoon | SetSortField;

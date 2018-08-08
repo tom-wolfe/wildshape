@@ -1,31 +1,47 @@
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+
+import * as Directives from './directives';
+import * as Pipes from './pipes';
 
 const MODULES = [
   FormsModule,
   HttpClientModule,
-  BrowserModule,
+  CommonModule,
   RouterModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
 ];
 
 const COMPONENTS = [
-  // FooterComponent
+
+];
+
+const PIPES = [
+  Pipes.NonZeroPipe,
+  Pipes.ChallengeRatingPipe
+];
+
+const DIRECTIVES = [
+  Directives.SortDirective,
 ];
 
 @NgModule({
   declarations: [
-    ...COMPONENTS
+    ...COMPONENTS,
+    ...PIPES,
+    ...DIRECTIVES
   ],
   imports: [
-    ...MODULES,
+    ...MODULES
   ],
   exports: [
     ...MODULES,
-    ...COMPONENTS
+    ...COMPONENTS,
+    ...PIPES,
+    ...DIRECTIVES
   ]
 })
 export class SharedModule { }
