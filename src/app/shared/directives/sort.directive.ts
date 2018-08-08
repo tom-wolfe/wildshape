@@ -24,7 +24,6 @@ export class SortDirective implements OnInit {
   }
 
   onSortChanged(sort: Sort) {
-    console.log(sort, this.sort);
     this.element.classList.remove('ascending', 'descending');
     if (sort.field === this.sort) {
       this.element.classList.add(sort.ascending ? 'ascending' : 'descending');
