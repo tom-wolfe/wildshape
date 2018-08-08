@@ -4,6 +4,7 @@ import { AppState } from '@ws/core/store';
 import { Creature } from '@ws/wildshape/models';
 import { selectors, SetSortField } from '@ws/wildshape/store';
 import * as _ from 'lodash';
+import { maxDamage } from '@ws/wildshape/utils';
 
 @Component({
   selector: 'ws-search-results',
@@ -11,14 +12,12 @@ import * as _ from 'lodash';
   styleUrls: ['./search-results.component.scss']
 })
 export class SearchResultsComponent {
+  maxDamage = maxDamage;
+
   creatures: Creature[];
 
   constructor(private store: Store<AppState>) {
     this.store.pipe(select(selectors.searchResults)).subscribe(c => this.creatures = c);
-  }
-
-  maxDamage(creature: Creature) {
-    return _.max(creature.actions.filter(a => a.damage).map(a => a.damage.average));
   }
 
   creatureLink(creature: Creature) {

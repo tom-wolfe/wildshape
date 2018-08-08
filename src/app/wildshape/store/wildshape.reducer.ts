@@ -4,7 +4,7 @@ import { WildshapeState } from './wildshape.state';
 export const initialState: WildshapeState = {
   creatures: [],
   filter: {
-    level: 1,
+    level: 2,
     moon: false
   },
   sort: {
