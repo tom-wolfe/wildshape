@@ -1,6 +1,6 @@
 # Wildshape
 
-[See it Running Here!](http://twolfe.co.uk/wildshape)
+[See it Running Here!](http://wildshape.twolfe.co.uk)
 
 Wildshape is a D&D 5e player tool to allow druid PCs to browse the list of beasts they can turn into.
 
