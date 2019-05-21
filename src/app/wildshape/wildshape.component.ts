@@ -1,10 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { canWildshape, challengeRatingFormatter, druidLevel, moonLevel, titleCaseFormatter, zeroFormatter } from '@ws/utils';
-import { ColDef, ColGroupDef, GridReadyEvent } from 'ag-grid-community';
+import { ColDef, ColGroupDef, GridReadyEvent, ValueGetterParams } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Creature } from './models';
+
+function creatureLink(creature: Creature) {
+  const name = creature.name.toLowerCase().replace(' ', '-');
+  return 'https://www.dndbeyond.com/monsters/' + name;
+}
+
+function linkRenderer(p: ValueGetterParams): string {
+  const creature = p.data as Creature;
+  return `<a href="${creatureLink(creature)}" target="_blank">${creature.name}</a>`;
+}
 
 @Component({
   selector: 'ws-wildshape',
@@ -22,8 +32,7 @@ export class WildshapeComponent {
         { headerName: 'Moon Level', valueGetter: p => moonLevel(p.data), sortable: true, filter: true, width: 80 },
       ]
     },
-    // TODO: LINK Name
-    { headerName: 'Name', field: 'name', sortable: true, filter: true },
+    { headerName: 'Name', sortable: true, filter: true, cellRenderer: linkRenderer },
     { headerName: 'CR', field: 'challenge.rating', sortable: true, filter: true, width: 60, valueFormatter: challengeRatingFormatter },
     { headerName: 'Size', field: 'size', sortable: true, filter: true, width: 90, valueFormatter: titleCaseFormatter },
     // TODO: Damage
@@ -72,10 +81,5 @@ export class WildshapeComponent {
 
   onGridReady(params: GridReadyEvent) {
     params.api.sizeColumnsToFit();
-  }
-
-  creatureLink(creature: Creature) {
-    const name = creature.name.toLowerCase().replace(' ', '-');
-    return 'https://www.dndbeyond.com/monsters/' + name;
   }
 }
