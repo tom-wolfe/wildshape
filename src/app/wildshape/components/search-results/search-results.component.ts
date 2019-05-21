@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { AppState } from '@ws/core/store';
+import { HttpClient } from '@angular/common/http';
+import { Component, ViewChild } from '@angular/core';
+import { challengeRating, hideIfZero, titleCase } from '@ws/utils';
 import { Creature } from '@ws/wildshape/models';
-import { selectors, SetSortField } from '@ws/wildshape/store';
 import { maxDamage } from '@ws/wildshape/utils';
+import { AgGridNg2 } from 'ag-grid-angular';
 import { ColDef, ColGroupDef } from 'ag-grid-community';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ws-search-results',
@@ -14,9 +15,16 @@ import { ColDef, ColGroupDef } from 'ag-grid-community';
 export class SearchResultsComponent {
   maxDamage = maxDamage;
 
-  creatures: Creature[];
+  creatures: Observable<Creature[]>;
 
   columns: (ColDef | ColGroupDef)[] = [
+    {
+      headerName: 'Requirements',
+      children: [
+        { headerName: 'Level', field: 'abilities.str', sortable: true, filter: true, width: 70 },
+        { headerName: 'Moon?', field: 'abilities.dex', sortable: true, filter: true, width: 80 },
+      ]
+    },
     {
       headerName: 'Name',
       field: 'name',
@@ -24,11 +32,9 @@ export class SearchResultsComponent {
       filter: true
       // TODO: LINK Name
     },
-    // TODO: Challenge rating type.
-    { headerName: 'CR', field: 'challenge.rating', sortable: true, filter: true, width: 60 },
-    // TODO: Title case.
-    { headerName: 'Size', field: 'size', sortable: true, filter: true, width: 80 },
-    // TODO: Dmage
+    { headerName: 'CR', field: 'challenge.rating', sortable: true, filter: true, width: 60, valueFormatter: p => challengeRating(p.value) },
+    { headerName: 'Size', field: 'size', sortable: true, filter: true, width: 90, valueFormatter: p => titleCase(p.value) },
+    // TODO: Damage
     { headerName: 'HP', field: 'hp.average', sortable: true, filter: true, width: 60 },
     {
       headerName: 'Abilities',
@@ -44,36 +50,38 @@ export class SearchResultsComponent {
     {
       headerName: 'Senses',
       children: [
-        // TODO: Hide if zero.
-        { headerName: 'Truesight', field: 'senses.truesight', sortable: true, filter: true, width: 90 },
-        { headerName: 'Blindsight', field: 'senses.blindsight', sortable: true, filter: true, width: 100 },
-        { headerName: 'Darkvision', field: 'senses.darkvision', sortable: true, filter: true, width: 100 },
-        { headerName: 'Tremorsense', field: 'senses.tremorsense', sortable: true, filter: true, width: 110 },
+        { headerName: 'Truesight', field: 'senses.truesight', sortable: true, filter: true, width: 90, valueFormatter: p => hideIfZero(p.value) },
+        { headerName: 'Blindsight', field: 'senses.blindsight', sortable: true, filter: true, width: 100, valueFormatter: p => hideIfZero(p.value) },
+        { headerName: 'Darkvision', field: 'senses.darkvision', sortable: true, filter: true, width: 100, valueFormatter: p => hideIfZero(p.value) },
+        { headerName: 'Tremorsense', field: 'senses.tremorsense', sortable: true, filter: true, width: 110, valueFormatter: p => hideIfZero(p.value) },
       ]
     },
     {
       headerName: 'Speed',
       children: [
-        // TODO: Hide if zero,
-        { headerName: 'Walk', field: 'speed.walk', sortable: true, filter: true, width: 70 },
-        { headerName: 'Fly', field: 'speed.fly', sortable: true, filter: true, width: 70 },
-        { headerName: 'Climb', field: 'speed.climb', sortable: true, filter: true, width: 80 },
-        { headerName: 'Burrow', field: 'speed.burrow', sortable: true, filter: true, width: 80 },
-        { headerName: 'Swim', field: 'speed.swim', sortable: true, filter: true, width: 70 },
+        { headerName: 'Walk', field: 'speed.walk', sortable: true, filter: true, width: 70, valueFormatter: p => hideIfZero(p.value) },
+        { headerName: 'Fly', field: 'speed.fly', sortable: true, filter: true, width: 70, valueFormatter: p => hideIfZero(p.value) },
+        { headerName: 'Climb', field: 'speed.climb', sortable: true, filter: true, width: 80, valueFormatter: p => hideIfZero(p.value) },
+        { headerName: 'Burrow', field: 'speed.burrow', sortable: true, filter: true, width: 80, valueFormatter: p => hideIfZero(p.value) },
+        { headerName: 'Swim', field: 'speed.swim', sortable: true, filter: true, width: 70, valueFormatter: p => hideIfZero(p.value) },
       ]
     },
   ];
 
-  constructor(private store: Store<AppState>) {
-    this.store.pipe(select(selectors.searchResults)).subscribe(c => this.creatures = c);
+  options: any = {
+
+    domLayout: 'autoHeight'
+  };
+
+  @ViewChild('grid') grid: AgGridNg2;
+
+  constructor(private http: HttpClient) { }
+  ngOnInit() {
+    this.creatures = this.http.get<Creature[]>('https://twolfe.co.uk/dnd/data/monsters.json');
   }
 
   creatureLink(creature: Creature) {
     const name = creature.name.toLowerCase().replace(' ', '-');
     return 'https://www.dndbeyond.com/monsters/' + name;
-  }
-
-  setSort(field: string) {
-    this.store.dispatch(new SetSortField(field));
   }
 }

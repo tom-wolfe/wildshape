@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+<<<<<<< HEAD
 import { canWildshape, challengeRatingFormatter, druidLevel, moonLevel, titleCaseFormatter, zeroFormatter } from '@ws/utils';
 import { ColDef, ColGroupDef, GridReadyEvent, ValueGetterParams } from 'ag-grid-community';
 import { Observable } from 'rxjs';
@@ -15,6 +16,8 @@ function linkRenderer(p: ValueGetterParams): string {
   const creature = p.data as Creature;
   return `<a href="${creatureLink(creature)}" target="_blank">${creature.name}</a>`;
 }
+=======
+>>>>>>> Remove NGRX
 
 @Component({
   selector: 'ws-wildshape',
@@ -22,6 +25,7 @@ function linkRenderer(p: ValueGetterParams): string {
   styleUrls: ['./wildshape.component.scss']
 })
 export class WildshapeComponent {
+<<<<<<< HEAD
   creatures: Observable<Creature[]>;
 
   columns: (ColDef | ColGroupDef)[] = [
@@ -82,4 +86,7 @@ export class WildshapeComponent {
   onGridReady(params: GridReadyEvent) {
     params.api.sizeColumnsToFit();
   }
+=======
+  constructor() { }
+>>>>>>> Remove NGRX
 }
