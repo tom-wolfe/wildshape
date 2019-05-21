@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
-import { booleanFormatter, challengeRatingFormatter, druidLevel, moonDruidOnly, titleCaseFormatter, zeroFormatter } from '@ws/utils';
-import { AgGridNg2 } from 'ag-grid-angular';
-import { ColDef, ColGroupDef } from 'ag-grid-community';
+import { Component } from '@angular/core';
+import { canWildshape, challengeRatingFormatter, druidLevel, moonLevel, titleCaseFormatter, zeroFormatter } from '@ws/utils';
+import { ColDef, ColGroupDef, GridReadyEvent } from 'ag-grid-community';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Creature } from './models';
 
 @Component({
   selector: 'ws-wildshape',
-  templateUrl: './wildshape.component.html'
+  templateUrl: './wildshape.component.html',
+  styleUrls: ['./wildshape.component.scss']
 })
 export class WildshapeComponent {
   creatures: Observable<Creature[]>;
@@ -18,16 +19,11 @@ export class WildshapeComponent {
       headerName: 'Requirements',
       children: [
         { headerName: 'Level', valueGetter: p => druidLevel(p.data), sortable: true, filter: true, width: 70 },
-        { headerName: 'Moon?', valueGetter: p => moonDruidOnly(p.data), valueFormatter: booleanFormatter, sortable: true, filter: true, width: 80 },
+        { headerName: 'Moon Level', valueGetter: p => moonLevel(p.data), sortable: true, filter: true, width: 80 },
       ]
     },
-    {
-      headerName: 'Name',
-      field: 'name',
-      sortable: true,
-      filter: true
-      // TODO: LINK Name
-    },
+    // TODO: LINK Name
+    { headerName: 'Name', field: 'name', sortable: true, filter: true },
     { headerName: 'CR', field: 'challenge.rating', sortable: true, filter: true, width: 60, valueFormatter: challengeRatingFormatter },
     { headerName: 'Size', field: 'size', sortable: true, filter: true, width: 90, valueFormatter: titleCaseFormatter },
     // TODO: Damage
@@ -64,15 +60,18 @@ export class WildshapeComponent {
     },
   ];
 
-  options: any = {
-    domLayout: 'autoHeight'
-  };
-
-  @ViewChild('grid') grid: AgGridNg2;
+  options: any = { domLayout: 'autoHeight' };
 
   constructor(private http: HttpClient) { }
+
   ngOnInit() {
-    this.creatures = this.http.get<Creature[]>('https://twolfe.co.uk/dnd/data/monsters.json');
+    this.creatures = this.http.get<Creature[]>('https://twolfe.co.uk/dnd/data/monsters.json').pipe(
+      map(creatures => creatures.filter(canWildshape))
+    );
+  }
+
+  onGridReady(params: GridReadyEvent) {
+    params.api.sizeColumnsToFit();
   }
 
   creatureLink(creature: Creature) {

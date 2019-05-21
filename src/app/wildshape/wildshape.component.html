@@ -1,5 +1,5 @@
 <div class="container-fluid">
   <ag-grid-angular #grid style="width: 100%" class="ag-theme-balham" [rowData]="creatures | async" [gridOptions]="options"
-    [columnDefs]="columns">
+    [columnDefs]="columns" (gridReady)="onGridReady($event)">
   </ag-grid-angular>
 </div>
