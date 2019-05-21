@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AgGridModule } from 'ag-grid-angular';
 import { WildshapeComponent } from './wildshape.component';
 
-
 const COMPONENTS = [
   WildshapeComponent
 ];
