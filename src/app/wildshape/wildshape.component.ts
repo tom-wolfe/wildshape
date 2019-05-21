@@ -28,7 +28,7 @@ export class WildshapeComponent {
       headerName: 'Requirements',
       children: [
         { headerName: 'Level', valueGetter: p => druidLevel(p.data), sortable: true, filter: true, minWidth: 70 },
-        { headerName: 'Moon', valueGetter: p => moonLevel(p.data), sortable: true, filter: true, minWidth: 70 },
+        { headerName: 'Moon', valueGetter: p => moonLevel(p.data), sortable: true, filter: true, minWidth: 80 },
       ]
     },
     { headerName: 'Name', sortable: true, filter: true, cellRenderer: linkRenderer, minWidth: 170 },
