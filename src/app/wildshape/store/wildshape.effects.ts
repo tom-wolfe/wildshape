@@ -13,7 +13,7 @@ export class WildshapeEffects {
   @Effect() loadCreatures = this.actions
     .pipe(
       ofType<Wildshape.LoadCreatures>(Wildshape.LoadCreatures.TYPE),
-      mergeMap(() => this.http.get<any[]>('assets/monsters.json').pipe(
+      mergeMap(() => this.http.get<any[]>('https://twolfe.co.uk/dnd/data/monsters.json').pipe(
         map(data => new Wildshape.SetCreatures(data))
       ))
     );
