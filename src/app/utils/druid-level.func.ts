@@ -1,5 +1,6 @@
 import { Creature } from "@ws/wildshape/models";
 
+<<<<<<< HEAD
 export function canWildshape(creature: Creature): boolean {
     return creature.type === 'beast'
     || creature.name === 'Air Elemental'
@@ -39,3 +40,8 @@ export function druidLevel(creature: Creature): number {
 
   return undefined;
 }
+=======
+export function druidLevel(value: Creature): number {
+  return 0;
+}
+>>>>>>> Update formatting

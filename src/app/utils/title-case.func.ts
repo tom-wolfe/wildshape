@@ -9,6 +9,4 @@ export function titleCase(value: string): string {
 
 export function titleCaseFormatter(p: ValueFormatterParams) {
   return titleCase(p.value);
-=======
->>>>>>> Remove NGRX
 }
