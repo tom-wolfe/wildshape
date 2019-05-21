@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AgGridModule } from 'ag-grid-angular';
-import * as Components from './components';
 import { WildshapeComponent } from './wildshape.component';
-import { WildshapeRoutingModule } from './wildshape.routing';
+
 
 const COMPONENTS = [
-  WildshapeComponent,
-  Components.SearchResultsComponent
+  WildshapeComponent
 ];
 
 @NgModule({
@@ -16,7 +14,6 @@ const COMPONENTS = [
   ],
   imports: [
     CommonModule,
-    WildshapeRoutingModule,
     AgGridModule.withComponents([])
   ],
   providers: [
