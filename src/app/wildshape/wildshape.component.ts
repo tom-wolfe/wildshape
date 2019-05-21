@@ -18,8 +18,7 @@ function linkRenderer(p: ValueGetterParams): string {
 
 @Component({
   selector: 'ws-wildshape',
-  templateUrl: './wildshape.component.html',
-  styleUrls: ['./wildshape.component.scss']
+  templateUrl: './wildshape.component.html'
 })
 export class WildshapeComponent {
   creatures: Observable<Creature[]>;
@@ -68,8 +67,6 @@ export class WildshapeComponent {
       ]
     },
   ];
-
-  options: any = { /*domLayout: 'autoHeight'*/ };
 
   constructor(private http: HttpClient) { }
 
