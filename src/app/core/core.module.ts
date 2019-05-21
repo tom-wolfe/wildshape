@@ -6,7 +6,6 @@ import * as Components from './components';
 
 const COMPONENTS = [
   Components.HeaderComponent,
-  Components.FooterComponent
 ];
 
 const MODULES = [

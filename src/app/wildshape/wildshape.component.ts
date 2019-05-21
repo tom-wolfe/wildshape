@@ -28,48 +28,48 @@ export class WildshapeComponent {
     {
       headerName: 'Requirements',
       children: [
-        { headerName: 'Level', valueGetter: p => druidLevel(p.data), sortable: true, filter: true, width: 70 },
-        { headerName: 'Moon Level', valueGetter: p => moonLevel(p.data), sortable: true, filter: true, width: 80 },
+        { headerName: 'Level', valueGetter: p => druidLevel(p.data), sortable: true, filter: true, minWidth: 70 },
+        { headerName: 'Moon', valueGetter: p => moonLevel(p.data), sortable: true, filter: true, minWidth: 70 },
       ]
     },
-    { headerName: 'Name', sortable: true, filter: true, cellRenderer: linkRenderer },
-    { headerName: 'CR', field: 'challenge.rating', sortable: true, filter: true, width: 60, valueFormatter: challengeRatingFormatter },
-    { headerName: 'Size', field: 'size', sortable: true, filter: true, width: 90, valueFormatter: titleCaseFormatter },
+    { headerName: 'Name', sortable: true, filter: true, cellRenderer: linkRenderer, minWidth: 170 },
+    { headerName: 'CR', field: 'challenge.rating', sortable: true, filter: true, minWidth: 60, valueFormatter: challengeRatingFormatter },
+    { headerName: 'Size', field: 'size', sortable: true, filter: true, minWidth: 90, valueFormatter: titleCaseFormatter },
     // TODO: Damage
-    { headerName: 'HP', field: 'hp.average', sortable: true, filter: true, width: 60 },
+    { headerName: 'HP', field: 'hp.average', sortable: true, filter: true, minWidth: 60 },
     {
       headerName: 'Abilities',
       children: [
-        { headerName: 'STR', field: 'abilities.str', sortable: true, filter: true, width: 70 },
-        { headerName: 'DEX', field: 'abilities.dex', sortable: true, filter: true, width: 70 },
-        { headerName: 'CON', field: 'abilities.con', sortable: true, filter: true, width: 70 },
-        { headerName: 'INT', field: 'abilities.int', sortable: true, filter: true, width: 70 },
-        { headerName: 'WIS', field: 'abilities.wis', sortable: true, filter: true, width: 70 },
-        { headerName: 'CHA', field: 'abilities.cha', sortable: true, filter: true, width: 70 },
+        { headerName: 'STR', field: 'abilities.strength', sortable: true, filter: true, minWidth: 70 },
+        { headerName: 'DEX', field: 'abilities.dexterity', sortable: true, filter: true, minWidth: 70 },
+        { headerName: 'CON', field: 'abilities.constitution', sortable: true, filter: true, minWidth: 70 },
+        { headerName: 'INT', field: 'abilities.intelligence', sortable: true, filter: true, minWidth: 70 },
+        { headerName: 'WIS', field: 'abilities.wisdom', sortable: true, filter: true, minWidth: 70 },
+        { headerName: 'CHA', field: 'abilities.charisma', sortable: true, filter: true, minWidth: 70 },
       ]
     },
     {
       headerName: 'Senses',
       children: [
-        { headerName: 'Truesight', field: 'senses.truesight', sortable: true, filter: true, width: 90, valueFormatter: zeroFormatter },
-        { headerName: 'Blindsight', field: 'senses.blindsight', sortable: true, filter: true, width: 100, valueFormatter: zeroFormatter },
-        { headerName: 'Darkvision', field: 'senses.darkvision', sortable: true, filter: true, width: 100, valueFormatter: zeroFormatter },
-        { headerName: 'Tremorsense', field: 'senses.tremorsense', sortable: true, filter: true, width: 110, valueFormatter: zeroFormatter },
+        { headerName: 'Truesight', field: 'senses.truesight', sortable: true, filter: true, minWidth: 90, valueFormatter: zeroFormatter },
+        { headerName: 'Blindsight', field: 'senses.blindsight', sortable: true, filter: true, minWidth: 100, valueFormatter: zeroFormatter },
+        { headerName: 'Darkvision', field: 'senses.darkvision', sortable: true, filter: true, minWidth: 100, valueFormatter: zeroFormatter },
+        { headerName: 'Tremorsense', field: 'senses.tremorsense', sortable: true, filter: true, minWidth: 110, valueFormatter: zeroFormatter },
       ]
     },
     {
       headerName: 'Speed',
       children: [
-        { headerName: 'Walk', field: 'speed.walk', sortable: true, filter: true, width: 70, valueFormatter: zeroFormatter },
-        { headerName: 'Fly', field: 'speed.fly', sortable: true, filter: true, width: 70, valueFormatter: zeroFormatter },
-        { headerName: 'Climb', field: 'speed.climb', sortable: true, filter: true, width: 80, valueFormatter: zeroFormatter },
-        { headerName: 'Burrow', field: 'speed.burrow', sortable: true, filter: true, width: 80, valueFormatter: zeroFormatter },
-        { headerName: 'Swim', field: 'speed.swim', sortable: true, filter: true, width: 70, valueFormatter: zeroFormatter },
+        { headerName: 'Walk', field: 'speed.walk', sortable: true, filter: true, minWidth: 70, valueFormatter: zeroFormatter },
+        { headerName: 'Fly', field: 'speed.fly', sortable: true, filter: true, minWidth: 70, valueFormatter: zeroFormatter },
+        { headerName: 'Climb', field: 'speed.climb', sortable: true, filter: true, minWidth: 80, valueFormatter: zeroFormatter },
+        { headerName: 'Burrow', field: 'speed.burrow', sortable: true, filter: true, minWidth: 80, valueFormatter: zeroFormatter },
+        { headerName: 'Swim', field: 'speed.swim', sortable: true, filter: true, minWidth: 70, valueFormatter: zeroFormatter },
       ]
     },
   ];
 
-  options: any = { domLayout: 'autoHeight' };
+  options: any = { /*domLayout: 'autoHeight'*/ };
 
   constructor(private http: HttpClient) { }
 

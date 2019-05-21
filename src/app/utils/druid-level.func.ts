@@ -22,8 +22,8 @@ export function moonLevel(creature: Creature): number {
   if (creature.type !== 'beast') { return undefined; }
 
   // Speed restrictions.
-  if (creature.speed.swim > 0) { return 4; }
   if (creature.speed.fly > 0) { return 8; }
+  if (creature.speed.swim > 0) { return 4; }
 
   if (creature.challenge.rating <= 1) { return 2; }
   return creature.challenge.rating * 3;
@@ -31,17 +31,15 @@ export function moonLevel(creature: Creature): number {
 
 export function druidLevel(creature: Creature): number {
   if (creature.type !== 'beast') { return undefined; }
+  if (creature.challenge.rating > 0.5) { return undefined; }
 
-  // Speed restrictions.
-  if (creature.speed.swim > 0) { return 4; }
   if (creature.speed.fly > 0) { return 8; }
+  if (creature.challenge.rating === 0.5) { return 8; }
 
-  // TODO: Combine these to check minimum.
-  if (creature.challenge.rating <= 0.125) { return 2; }
-  if (creature.challenge.rating <= 0.25) { return 4; }
-  if (creature.challenge.rating <= 0.5) { return 8; }
+  if (creature.speed.swim > 0) { return 4; }
+  if (creature.challenge.rating === 0.25) { return 4; }
 
-  return undefined;
+  return 2;
 }
 <<<<<<< HEAD
 =======
