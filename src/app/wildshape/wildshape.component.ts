@@ -6,14 +6,10 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Creature } from './models';
 
-function creatureLink(creature: Creature) {
-  const name = creature.name.toLowerCase().replace(' ', '-');
-  return 'https://www.dndbeyond.com/monsters/' + name;
-}
 
 function linkRenderer(p: ValueGetterParams): string {
   const creature = p.data as Creature;
-  return `<a href="${creatureLink(creature)}" target="_blank">${creature.name}</a>`;
+  return `<a href="${creature.source}" target="_blank">${creature.name}</a>`;
 }
 
 @Component({
@@ -24,16 +20,16 @@ export class WildshapeComponent {
   creatures: Observable<Creature[]>;
 
   columns: (ColDef | ColGroupDef)[] = [
+    { headerName: 'Name', sortable: true, filter: true, cellRenderer: linkRenderer, minWidth: 170, pinned: true },
+    { headerName: 'Size', field: 'size', sortable: true, filter: true, minWidth: 90, valueFormatter: titleCaseFormatter },
+    { headerName: 'CR', field: 'challenge.rating', sortable: true, filter: true, minWidth: 60, valueFormatter: challengeRatingFormatter },
     {
-      headerName: 'Requirements',
+      headerName: 'Required Level',
       children: [
-        { headerName: 'Level', valueGetter: p => druidLevel(p.data), sortable: true, filter: true, minWidth: 70 },
+        { headerName: '', valueGetter: p => druidLevel(p.data), sortable: true, filter: true, minWidth: 70 },
         { headerName: 'Moon', valueGetter: p => moonLevel(p.data), sortable: true, filter: true, minWidth: 80 },
       ]
     },
-    { headerName: 'Name', sortable: true, filter: true, cellRenderer: linkRenderer, minWidth: 170 },
-    { headerName: 'CR', field: 'challenge.rating', sortable: true, filter: true, minWidth: 60, valueFormatter: challengeRatingFormatter },
-    { headerName: 'Size', field: 'size', sortable: true, filter: true, minWidth: 90, valueFormatter: titleCaseFormatter },
     // TODO: Damage
     { headerName: 'HP', field: 'hp.average', sortable: true, filter: true, minWidth: 60 },
     {
