@@ -1,10 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
-import { AgGridNg2 } from 'ag-grid-angular';
 import { HttpClient } from '@angular/common/http';
-import { Creature } from './models';
-import { Observable } from 'rxjs';
+import { Component, ViewChild } from '@angular/core';
+import { booleanFormatter, challengeRatingFormatter, druidLevel, moonDruidOnly, titleCaseFormatter, zeroFormatter } from '@ws/utils';
+import { AgGridNg2 } from 'ag-grid-angular';
 import { ColDef, ColGroupDef } from 'ag-grid-community';
-import { hideIfZero, challengeRating, titleCase } from '@ws/utils';
+import { Observable } from 'rxjs';
+import { Creature } from './models';
 
 @Component({
   selector: 'ws-wildshape',
@@ -17,8 +17,8 @@ export class WildshapeComponent {
     {
       headerName: 'Requirements',
       children: [
-        { headerName: 'Level', field: 'abilities.str', sortable: true, filter: true, width: 70 },
-        { headerName: 'Moon?', field: 'abilities.dex', sortable: true, filter: true, width: 80 },
+        { headerName: 'Level', valueGetter: p => druidLevel(p.data), sortable: true, filter: true, width: 70 },
+        { headerName: 'Moon?', valueGetter: p => moonDruidOnly(p.data), valueFormatter: booleanFormatter, sortable: true, filter: true, width: 80 },
       ]
     },
     {
@@ -28,8 +28,8 @@ export class WildshapeComponent {
       filter: true
       // TODO: LINK Name
     },
-    { headerName: 'CR', field: 'challenge.rating', sortable: true, filter: true, width: 60, valueFormatter: p => challengeRating(p.value) },
-    { headerName: 'Size', field: 'size', sortable: true, filter: true, width: 90, valueFormatter: p => titleCase(p.value) },
+    { headerName: 'CR', field: 'challenge.rating', sortable: true, filter: true, width: 60, valueFormatter: challengeRatingFormatter },
+    { headerName: 'Size', field: 'size', sortable: true, filter: true, width: 90, valueFormatter: titleCaseFormatter },
     // TODO: Damage
     { headerName: 'HP', field: 'hp.average', sortable: true, filter: true, width: 60 },
     {
@@ -46,26 +46,25 @@ export class WildshapeComponent {
     {
       headerName: 'Senses',
       children: [
-        { headerName: 'Truesight', field: 'senses.truesight', sortable: true, filter: true, width: 90, valueFormatter: p => hideIfZero(p.value) },
-        { headerName: 'Blindsight', field: 'senses.blindsight', sortable: true, filter: true, width: 100, valueFormatter: p => hideIfZero(p.value) },
-        { headerName: 'Darkvision', field: 'senses.darkvision', sortable: true, filter: true, width: 100, valueFormatter: p => hideIfZero(p.value) },
-        { headerName: 'Tremorsense', field: 'senses.tremorsense', sortable: true, filter: true, width: 110, valueFormatter: p => hideIfZero(p.value) },
+        { headerName: 'Truesight', field: 'senses.truesight', sortable: true, filter: true, width: 90, valueFormatter: zeroFormatter },
+        { headerName: 'Blindsight', field: 'senses.blindsight', sortable: true, filter: true, width: 100, valueFormatter: zeroFormatter },
+        { headerName: 'Darkvision', field: 'senses.darkvision', sortable: true, filter: true, width: 100, valueFormatter: zeroFormatter },
+        { headerName: 'Tremorsense', field: 'senses.tremorsense', sortable: true, filter: true, width: 110, valueFormatter: zeroFormatter },
       ]
     },
     {
       headerName: 'Speed',
       children: [
-        { headerName: 'Walk', field: 'speed.walk', sortable: true, filter: true, width: 70, valueFormatter: p => hideIfZero(p.value) },
-        { headerName: 'Fly', field: 'speed.fly', sortable: true, filter: true, width: 70, valueFormatter: p => hideIfZero(p.value) },
-        { headerName: 'Climb', field: 'speed.climb', sortable: true, filter: true, width: 80, valueFormatter: p => hideIfZero(p.value) },
-        { headerName: 'Burrow', field: 'speed.burrow', sortable: true, filter: true, width: 80, valueFormatter: p => hideIfZero(p.value) },
-        { headerName: 'Swim', field: 'speed.swim', sortable: true, filter: true, width: 70, valueFormatter: p => hideIfZero(p.value) },
+        { headerName: 'Walk', field: 'speed.walk', sortable: true, filter: true, width: 70, valueFormatter: zeroFormatter },
+        { headerName: 'Fly', field: 'speed.fly', sortable: true, filter: true, width: 70, valueFormatter: zeroFormatter },
+        { headerName: 'Climb', field: 'speed.climb', sortable: true, filter: true, width: 80, valueFormatter: zeroFormatter },
+        { headerName: 'Burrow', field: 'speed.burrow', sortable: true, filter: true, width: 80, valueFormatter: zeroFormatter },
+        { headerName: 'Swim', field: 'speed.swim', sortable: true, filter: true, width: 70, valueFormatter: zeroFormatter },
       ]
     },
   ];
 
   options: any = {
-
     domLayout: 'autoHeight'
   };
 
