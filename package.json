@@ -27,6 +27,7 @@
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
     "hoek": "^5.0.3",
+    "lodash": "4.17.5",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },
@@ -37,7 +38,7 @@
     "@angular/language-service": "^6.0.3",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
-    "@types/lodash": "^4.14.130",
+    "@types/lodash": "4.14.108",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
     "jasmine-core": "~2.99.1",

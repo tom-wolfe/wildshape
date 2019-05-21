@@ -1,6 +1,6 @@
+import { Action, Creature } from '@ws/wildshape/models';
 import { ValueFormatterParams, ValueGetterParams } from 'ag-grid-community';
 import * as _ from 'lodash';
-import { Action, Creature } from 'ws/wildshape/models';
 
 export function maxDamage(value: Creature): Action {
   if (!value.actions.length) { return undefined; }
