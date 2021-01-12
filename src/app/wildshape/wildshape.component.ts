@@ -88,7 +88,7 @@ export class WildshapeComponent {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.creatures = this.http.get<Creature[]>('https://twolfe.co.uk/dnd/data/monsters.json').pipe(
+    this.creatures = this.http.get<Creature[]>('https://dnd.twolfe.dev/data/monsters.json').pipe(
       map(creatures => creatures.filter(canWildshape))
     );
   }
