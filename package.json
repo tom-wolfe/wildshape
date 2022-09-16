@@ -23,7 +23,7 @@
     "@angular/router": "^6.1.0",
     "ag-grid-angular": "^20.2.0",
     "ag-grid-community": "^20.2.0",
-    "bootstrap": "^4.1.1",
+    "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
     "hoek": "^5.0.3",
